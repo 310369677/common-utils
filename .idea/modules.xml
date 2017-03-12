@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/common-js/common-js.iml" filepath="$PROJECT_DIR$/common-js/common-js.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/common-utils.iml" filepath="$PROJECT_DIR$/.idea/common-utils.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/reflect.iml" filepath="$PROJECT_DIR$/.idea/modules/reflect.iml" />
     </modules>
