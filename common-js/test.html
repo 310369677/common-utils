@@ -3,10 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script type="text/javascript" src="String-extend.js"></script>
     <script type="text/javascript" src="commonUtil.js"></script>
     <script type="text/javascript">
-       Utils.dynamicLoadScripts("VerifyUtil.js",function () {
-           alert(VerifyUtil.isString("123"));
+       Utils.dynamicLoadScripts(["Browser.js"],function () {
+    /*       alert(VerifyUtil.isString("123"));
+           alert(Browser.getBrowserName());
+           alert(Utils.generateUUID());*/
+          //alert(Utils.generateUUID(36));
+           alert(Utils.isNumber("12.34"))
        });
     </script>
 </head>

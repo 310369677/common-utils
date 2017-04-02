@@ -69,6 +69,7 @@ public class ExcelUtil {
      *
      * @param outputStream        写入的流
      * @param data                数据
+     * @param extraData           额外的数据
      * @param writeWorkBookMapper 写入匹配器
      * @param excelType           excel的类型
      * @throws IOException 读取文件的异常
@@ -163,7 +164,7 @@ public class ExcelUtil {
      */
     private static List<Object> parseSheet(Sheet sheet, ReadSheetMapper readSheetMapper) {
         Map<Integer, Map<Short, Object>> resultData = new HashMap<>();
-        Map<Integer, String> errorInfo = new HashMap<>();
+        Map<Integer, Map<Short,String>> errorInfo = new HashMap<>();
         List<Object> resultInfo = new ArrayList<>();
         int startRowIndex = sheet.getFirstRowNum();  //默认的起始行
         if (readSheetMapper.startRowIndex() >= 0) {
@@ -184,6 +185,7 @@ public class ExcelUtil {
             }
             Row row = sheet.getRow(rowIndex);
             Map<Short, Object> rowDataMap = new LinkedHashMap<>();
+            Map<Short,String> rowErrorInfo=new HashMap<>();
             //得到有多少列
             boolean parseError = false;
             short startColumnIndex = row.getFirstCellNum();
@@ -208,12 +210,12 @@ public class ExcelUtil {
                 try {
                     rowDataMap.put(columnIndex, readSheetMapper.handleCell(cell, rowIndex, columnIndex));
                 } catch (RuntimeException e) {  //这一列发生错误
-                    errorInfo.put(rowIndex, "第" + (rowIndex + 1) + "行" + (columnIndex + 1) + "列" + e.getMessage());
+                    rowErrorInfo.put(columnIndex,e.getMessage());
                     parseError = true;
-                    break;
                 }
             }
             if (parseError) {  //这一行解析出错了
+                errorInfo.put(rowIndex,rowErrorInfo);
                 continue;
             }
             resultData.put(rowIndex, rowDataMap);

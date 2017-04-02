@@ -53,6 +53,9 @@ public class ReadSheetMapperAdapter implements ReadSheetMapper {
     //默认的处理
     @Override
     public Object handleCell(Cell cell, int rowIndex, int columnIndex) throws RuntimeException {
+        if(cell==null){
+            return "";
+        }
         cell.setCellType(Cell.CELL_TYPE_STRING); //默认处理成字符串
         return cell.getStringCellValue();
     }
